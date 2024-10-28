@@ -14,7 +14,7 @@ public class ParcValrose extends RpgScreen {
 
     public ParcValrose(RpgGame game) {
         super(game);
-        background = new Texture(Gdx.files.internal("CarteF.png")); // Load your map texture
+        background = new Texture(Gdx.files.internal("carteF.png")); // Load your map texture
         mainCharacter = game.getMainCharacter(); // Get the character from the game
 
         // Initialize the camera with the screen width and height (adjust as needed)
