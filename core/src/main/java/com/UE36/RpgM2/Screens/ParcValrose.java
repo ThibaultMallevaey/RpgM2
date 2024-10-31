@@ -32,11 +32,8 @@ public class ParcValrose extends RpgScreen {
 
     public ParcValrose(RpgGame game) {
         super(game);
-        // background = new Texture(Gdx.files.internal("carteF.png"));
         mainCharacter = game.getMainCharacter(); // Get the character from the game
 
-        // JsonMapLoader jsonMapLoader = new JsonMapLoader(32, 32); // Set tile dimensions
-        // map = jsonMapLoader.load("carteF.json");
         map = new TmxMapLoader().load("Maps/carteF.tmx");
 
         mapObjectRendering = new MapObjectRendering(batch, map);
@@ -57,8 +54,8 @@ public class ParcValrose extends RpgScreen {
         camera.position.x = mainCharacter.getPosition().x;
         camera.position.y = mainCharacter.getPosition().y;
 
-        // camera.position.x = MathUtils.clamp(camera.position.x, camera.viewportWidth / 2f, map.getWidth() - camera.viewportWidth / 2f);
-        // camera.position.y = MathUtils.clamp(camera.position.y, camera.viewportHeight / 2f, map.getHeight() - camera.viewportHeight / 2f);
+        camera.position.x = MathUtils.clamp(mainCharacter.getPosition().x, camera.viewportWidth / 2f, map.getProperties().get("width", Integer.class) * 32 - camera.viewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(mainCharacter.getPosition().y, camera.viewportHeight / 2f, map.getProperties().get("height", Integer.class) * 32 - camera.viewportHeight / 2f);
 
         camera.update();
         mapRenderer.setView(camera);
@@ -70,16 +67,14 @@ public class ParcValrose extends RpgScreen {
 
         mapObjectRendering.renderLayerObjectsByTileId("Arbre");
         mapObjectRendering.renderLayerObjectsByTileId("info");
-        //mapObjectRendering.renderLayerObjectsByTileId("PV");
+        mapObjectRendering.renderLayerObjectsByTileId("PV_rot");
+        mapObjectRendering.renderLayerObjectsByTileId("PV");
         mapObjectRendering.renderLayerObjectsByTileId("acceuil");
-
-
 
         mainCharacter.render(batch);
         batch.end();
 
     }
-
 
     @Override
     public void dispose() {
