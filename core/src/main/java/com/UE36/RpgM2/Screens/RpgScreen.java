@@ -6,9 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /** First screen of the application. Displayed after the application is created. */
 public abstract class RpgScreen implements Screen {
+    // Classe mère pour les écrans. Crée par défault par libGdx
 
-    protected RpgGame game; // Reference to the main game class
-    protected SpriteBatch batch; // Shared batch for rendering
+    protected RpgGame game;
+    protected SpriteBatch batch;
 
     public RpgScreen(RpgGame game) {
         this.game = game;

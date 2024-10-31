@@ -7,17 +7,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class MainCharacter {
+    // Classe pour gérer tout ce qui est relatif au perso principal
     private Texture texture;
-    private Vector2 position; // Character's position on the map
+    private Vector2 position;
     private Vector2 touchPos;
     private int health;
     private float scale;
     private float speed;
 
     public MainCharacter() {
-        texture = new Texture("test.png"); // Load character texture
-        position = new Vector2(100, 100); // Starting position
-        health = 100; // Starting health
+        texture = new Texture("test.png");
+        health = 100;
         scale = 0.25f;
         speed = 100;
         touchPos = new Vector2();
@@ -29,11 +29,18 @@ public class MainCharacter {
         batch.draw(texture, position.x, position.y, width, height);
     }
 
+    public void setPosition(Vector2 position) {
+        // va permettre de gérer la position du personnage directement depuis les screens
+        this.position = position;
+    }
+
     public Vector2 getPosition() {
+        // permet de récupérer la position du personnage
         return position;
     }
 
     private void processInput(float delta) {
+        // gérer les inputs
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             position.y += speed * delta;
         }
@@ -49,15 +56,14 @@ public class MainCharacter {
     }
 
     public void update(float delta) {
-        // Update character position or state here
+        // Update : lance les fonctions pour mettre à jour le personnage
         processInput(delta);
     }
 
     public void dispose() {
+        // récupérer des perf
         texture.dispose();
     }
-
-    // Getters and setters for position, health, etc.
 
     public int getHealth() {
         return health;
@@ -67,4 +73,19 @@ public class MainCharacter {
         this.health = health;
     }
 
+    public float getScale() {
+        return scale;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
 }
