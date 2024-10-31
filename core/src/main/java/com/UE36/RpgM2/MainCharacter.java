@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 public class MainCharacter {
     private Texture texture;
     private Vector2 position; // Character's position on the map
+    private Vector2 touchPos;
     private int health;
     private float scale;
     private float speed;
@@ -19,6 +20,7 @@ public class MainCharacter {
         health = 100; // Starting health
         scale = 0.25f;
         speed = 100;
+        touchPos = new Vector2();
     }
 
     public void render(SpriteBatch batch) {
@@ -32,13 +34,13 @@ public class MainCharacter {
     }
 
     private void processInput(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             position.y += speed * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             position.y -= speed * delta;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             position.x -= speed * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
