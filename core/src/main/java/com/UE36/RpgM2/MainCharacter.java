@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
+import com.UE36.RpgM2.Utilities.Collisions;
 
 public class MainCharacter {
     // Classe pour gérer tout ce qui est relatif au perso principal
@@ -14,6 +16,7 @@ public class MainCharacter {
     private int health;
     private float scale;
     private float speed;
+    private Collisions collisions;
 
     public MainCharacter() {
         texture = new Texture("test.png");
@@ -21,6 +24,7 @@ public class MainCharacter {
         scale = 0.25f;
         speed = 100;
         touchPos = new Vector2();
+        this.collisions = new Collisions(this);
     }
 
     public void render(SpriteBatch batch) {
@@ -39,25 +43,32 @@ public class MainCharacter {
         return position;
     }
 
-    private void processInput(float delta) {
+    private void processInput(float delta, TiledMap map) {
         // gérer les inputs
+        Vector2 newPosition = new Vector2(position);  // Create a copy of position
+        collisions.setMap(map);  // Ensure map is set in collisions
+
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            position.y += speed * delta;
+            newPosition.y += speed * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            position.y -= speed * delta;
+            newPosition.y -= speed * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            position.x -= speed * delta;
+            newPosition.x -= speed * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            position.x += speed * delta;
+            newPosition.x += speed * delta;
+        }
+
+        if (!collisions.doCollide(newPosition)) {
+            position.set(newPosition);
         }
     }
 
-    public void update(float delta) {
+    public void update(float delta, TiledMap map) {
         // Update : lance les fonctions pour mettre à jour le personnage
-        processInput(delta);
+        processInput(delta, map);
     }
 
     public void dispose() {

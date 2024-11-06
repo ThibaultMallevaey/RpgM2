@@ -2,26 +2,14 @@ package com.UE36.RpgM2.Screens;
 
 import com.UE36.RpgM2.MainCharacter;
 import com.UE36.RpgM2.RpgGame;
-import com.UE36.RpgM2.Rendering.*;
+import com.UE36.RpgM2.Utilities.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
 
 public class ParcValrose extends RpgScreen {
     private OrthographicCamera camera;
@@ -44,6 +32,7 @@ public class ParcValrose extends RpgScreen {
 
         camera = new OrthographicCamera(); // idem pour la caméra du joueur
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
     }
 
     @Override
@@ -55,7 +44,7 @@ public class ParcValrose extends RpgScreen {
         // Tout ce qui est relatif à render = dessiner sur le jeu
 
         // On update les infos du perso
-        mainCharacter.update(delta);
+        mainCharacter.update(delta, map);
 
         // Mettre la caméra sur la position du perso
         camera.position.x = mainCharacter.getPosition().x;
