@@ -69,6 +69,7 @@ public class MainCharacter {
     public void update(float delta, TiledMap map) {
         // Update : lance les fonctions pour mettre à jour le personnage
         processInput(delta, map);
+
     }
 
     public void dispose() {

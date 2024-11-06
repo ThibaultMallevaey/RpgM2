@@ -1,6 +1,8 @@
 package com.UE36.RpgM2.Screens;
 
+import com.UE36.RpgM2.MainCharacter;
 import com.UE36.RpgM2.RpgGame;
+import com.UE36.RpgM2.Utilities.MapObjectRendering;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -10,10 +12,13 @@ public abstract class RpgScreen implements Screen {
 
     protected RpgGame game;
     protected SpriteBatch batch;
+    private MainCharacter mainCharacter;
+    private MapObjectRendering mapObjectRendering;
 
     public RpgScreen(RpgGame game) {
         this.game = game;
         this.batch = new SpriteBatch();
+
     }
 
     @Override

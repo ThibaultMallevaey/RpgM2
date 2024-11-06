@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="2461">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="2463">
  <tileset firstgid="1" name="building" tilewidth="32" tileheight="32" tilecount="216" columns="18">
   <image source="../Asset/image/building.png" width="576" height="384"/>
  </tileset>
@@ -1324,8 +1324,8 @@
   <object id="2447" x="703.096" y="360.086">
    <polygon points="-121.019,5.93956 -761.007,-63.1079 -704.581,-291.781 -437.3,-348.949 -112.109,-326.676 -2.22734,-247.977 28.9554,-135.125 -24.5007,3.71223"/>
   </object>
-  <object id="2451" x="985.225" y="245.007">
-   <polygon points="0,0 16.3338,164.08 181.899,182.642 311.827,181.899 611.775,210.855 615.487,-118.791 498.923,-100.973 427.649,-121.019 369.738,-96.5179 192.293,-85.3812 126.216,-124.731 72.0172,-46.7741 11.8791,-37.1223 -8.1669,-32.6676"/>
+  <object id="2451" x="963.459" y="223.127">
+   <polygon points="0,0 16.9114,181.106 188.332,201.594 322.854,200.774 633.409,232.735 637.253,-131.118 516.567,-111.451 442.772,-133.577 382.813,-106.533 199.093,-94.241 130.679,-137.674 74.564,-51.6277 12.2992,-40.9744 -8.45571,-36.0574"/>
   </object>
   <object id="2452" x="778.847" y="3.31895">
    <polygon points="0,0 0,453.59 -373.935,452.484 -373.935,342.958 -386.105,344.065 -384.998,452.484 -392.743,455.803 -392.743,469.078 17.7011,474.61 21.02,454.696 6.6379,454.696 8.85054,-3.31895"/>
@@ -1346,7 +1346,12 @@
    <polygon points="0,0 -2.50329,276.613 -9.38732,280.368 -8.7615,295.388 28.162,296.639 30.6652,271.606 17.523,270.981 21.2779,13.1422 416.171,15.6455 418.049,-179.611 344.828,-179.611 344.828,-147.068 386.132,-147.068 383.629,-19.4005 1.25164,-16.8972"/>
   </object>
  </objectgroup>
- <objectgroup id="15" name="transitions">
+ <objectgroup id="16" name="TransitionAcceuil">
+  <object id="2461" x="1366.22" y="460.824" width="124.202" height="40.6268">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="15" name="TransitionPV">
   <object id="2460" type="PV" x="305.401" y="322.298" width="40.6784" height="39.4267">
    <ellipse/>
   </object>
