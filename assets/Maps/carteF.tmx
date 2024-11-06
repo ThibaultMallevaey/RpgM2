@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="2460">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="2461">
  <tileset firstgid="1" name="building" tilewidth="32" tileheight="32" tilecount="216" columns="18">
   <image source="../Asset/image/building.png" width="576" height="384"/>
  </tileset>
- <tileset firstgid="217" source="../Asset/tile_set/building2_50.tsx"/>
+ <tileset firstgid="217" name="building2" tilewidth="50" tileheight="50" tilecount="1275" columns="51">
+  <image source="../Asset/image/building2.png" width="2560" height="1280"/>
+ </tileset>
  <tileset firstgid="1492" name="B-C-D-E_Serene_Village_01" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="../Asset/image/B-C-D-E_Serene_Village_01.png" width="512" height="512"/>
  </tileset>
@@ -1342,6 +1344,11 @@
   </object>
   <object id="2459" x="1125.23" y="628.95">
    <polygon points="0,0 -2.50329,276.613 -9.38732,280.368 -8.7615,295.388 28.162,296.639 30.6652,271.606 17.523,270.981 21.2779,13.1422 416.171,15.6455 418.049,-179.611 344.828,-179.611 344.828,-147.068 386.132,-147.068 383.629,-19.4005 1.25164,-16.8972"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="15" name="transitions">
+  <object id="2460" type="PV" x="305.401" y="322.298" width="40.6784" height="39.4267">
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

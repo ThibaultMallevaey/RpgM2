@@ -18,8 +18,8 @@ public class MainCharacter {
     private float speed;
     private Collisions collisions;
 
-    public MainCharacter() {
-        texture = new Texture("test.png");
+    public MainCharacter(String texturePath) {
+        texture = new Texture(texturePath);
         health = 100;
         scale = 0.25f;
         speed = 100;

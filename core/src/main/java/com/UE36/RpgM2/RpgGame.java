@@ -19,7 +19,7 @@ public class RpgGame extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        mainCharacter = new MainCharacter();
+        mainCharacter = new MainCharacter("test.png");
 
         setScreen(new ParcValrose(this)); // Définir ParcValrose en tant qu'écran
         // de début (peut être en faire un dédié ?)
