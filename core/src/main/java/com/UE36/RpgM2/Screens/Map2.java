@@ -62,6 +62,9 @@ public class Map2 extends RpgScreen{
 
         // initialisation du batch : render les objets
         batch.begin();
+        mapObjectRendering.renderLayerObjectsByTexture("Arbre", "Arbre.png");
+        mapObjectRendering.renderLayerObjectsByTileId("fleur");
+        mapObjectRendering.renderLayerObjectsByTileId("ScienceNat");
         mainCharacter.render(batch); // render le perso
         batch.end();
 
