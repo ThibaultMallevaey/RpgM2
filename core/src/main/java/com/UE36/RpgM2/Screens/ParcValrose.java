@@ -46,7 +46,7 @@ public class ParcValrose extends RpgScreen {
         if (transitions.onTransition("TransitionPV")){
             game.setScreen(new Map2(game));
         } else if (transitions.onTransition("TransitionAcceuil")){
-            game.setScreen(new Map2(game));
+            game.setScreen(new Map3(game));
         }
     }
 
