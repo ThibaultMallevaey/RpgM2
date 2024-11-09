@@ -45,8 +45,8 @@ public class MainCharacter {
 
     private void processInput(float delta, TiledMap map) {
         // gérer les inputs
-        Vector2 newPosition = new Vector2(position);  // Create a copy of position
-        collisions.setMap(map);  // Ensure map is set in collisions
+        Vector2 newPosition = new Vector2(position);
+        collisions.setMap(map);
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             newPosition.y += speed * delta;
@@ -69,6 +69,7 @@ public class MainCharacter {
     public void update(float delta, TiledMap map) {
         // Update : lance les fonctions pour mettre à jour le personnage
         processInput(delta, map);
+        System.out.println(getPosition());
 
     }
 

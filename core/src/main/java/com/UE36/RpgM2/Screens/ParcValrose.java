@@ -19,69 +19,41 @@ public class ParcValrose extends RpgScreen {
     private MapObjectRendering mapObjectRendering;
     private Transitions transitions;
 
-    public ParcValrose(RpgGame game) {
+    public ParcValrose(RpgGame game, Vector2 position) {
         //Constructeur
-        super(game);
-        mainCharacter = game.getMainCharacter(); // Récupérer le personnage depuis RpgGame
-        mainCharacter.setPosition(new Vector2 (1070, 10)); // définir la position de départ du personnage
-        mainCharacter.setSpeed(500);
-
+        super(game, position);
+        this.mainCharacter = game.getMainCharacter();
+        setUpMainCharacter(mainCharacter, position, 500);
         map = new TmxMapLoader().load("Maps/carteF.tmx"); // charger la map (provisoir si on doit l faire en Json?)
-
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
-
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
 
-        camera = new OrthographicCamera(); // idem pour la caméra du joueur
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
     }
-
     @Override
     public void show() {
     }
 
-    private void logic(){
+    @Override
+    protected void logic(){
         this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
-        if (transitions.onTransition("TransitionPV")){
-            game.setScreen(new Map2(game));
-        } else if (transitions.onTransition("TransitionAcceuil")){
-            game.setScreen(new Map3(game));
+        if (transitions.onTransition("Lien_Carte2")){
+            game.setScreen(new Map2(game, new Vector2(830, 5)));
         }
     }
 
     @Override
     public void render(float delta) {
-        // Tout ce qui est relatif à render = dessiner sur le jeu
         logic();
-        // On update les infos du perso
-        mainCharacter.update(delta, map);
-
-        // Mettre la caméra sur la position du perso
-        camera.position.x = mainCharacter.getPosition().x;
-        camera.position.y = mainCharacter.getPosition().y;
-
-        //Bloquer la caméra sur les bords de map
-        camera.position.x = MathUtils.clamp(mainCharacter.getPosition().x, camera.viewportWidth / 2f, map.getProperties().get("width", Integer.class) * 32 - camera.viewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(mainCharacter.getPosition().y, camera.viewportHeight / 2f, map.getProperties().get("height", Integer.class) * 32 - camera.viewportHeight / 2f);
-
-        // update la caméra et on render ce que l'on peut voir sur la caméra
-        camera.update();
-        mapRenderer.setView(camera);
-
-        mapRenderer.render();
-        batch.setProjectionMatrix(camera.combined);
-
+        basicRendering(delta, map, mapRenderer, mainCharacter);
         // initialisation du batch : render les objets
         batch.begin();
-
         // render les couches d'objets de la map
         mapObjectRendering.renderLayerObjectsByTexture("Arbre", "Arbre.png");
         mapObjectRendering.renderLayerObjectsByTileId("info");
         mapObjectRendering.renderLayerObjectsByTileId("PV_rot");
         mapObjectRendering.renderLayerObjectsByTileId("PV");
         mapObjectRendering.renderLayerObjectsByTileId("acceuil");
-
+        mapObjectRendering.renderLayerObjectsByTileId("Collision");
         mainCharacter.render(batch); // render le perso
         batch.end();
 

@@ -21,7 +21,7 @@ public class RpgGame extends Game {
         batch = new SpriteBatch();
         mainCharacter = new MainCharacter("test.png");
 
-        setScreen(new ParcValrose(this)); // Définir ParcValrose en tant qu'écran
+        setScreen(new ParcValrose(this, new Vector2 (1070, 10))); // Définir ParcValrose en tant qu'écran
         // de début (peut être en faire un dédié ?)
     }
 

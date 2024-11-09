@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="5113">
- <tileset firstgid="1" source="../../Asset/tile_set/Serene_Village_32x32.tsx"/>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="5119">
+ <tileset firstgid="1" source="../set/Serene_Village_32x32.tsx"/>
  <tileset firstgid="856" source="../Asset/tile_set/building2_50.tsx"/>
  <layer id="1" name="arriere plan " width="50" height="30">
   <data encoding="csv">
@@ -104,6 +104,20 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,116,116,116,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="11" name="Collision">
+  <object id="5115" x="1310" y="8">
+   <polygon points="0,0 0,378 210,382 208,-8"/>
+  </object>
+  <object id="5116" x="1224" y="-2">
+   <polygon points="0,0 -10,352 318,352 321.333,460 -328,460.667 -330,486 -323.333,488.667 -325.333,957.333 -306,960 -304,478 356,480 346,454 334,456 340,352 354,336 332,322 306,326 304,314 374,302 376,156 300,118 56,86 28,244 74,300 74,318 22,320 22,16"/>
+  </object>
+  <object id="5117" x="1084" y="2">
+   <polygon points="0,0 8,342 -288,350 -288,504 -374,512 -510,500 -510,408 -664,406 -672,440 -828,442 -834,470 -952,478 -968,376 -1088,378 -1084,-2"/>
+  </object>
+  <object id="5118" x="794" y="956">
+   <polygon points="0,0 2,-390 -108,-392 -122,-384 -252,-376 -256,-316 -376,-322 -380,-410 -542,-404 -546,-326 -672,-332 -674,-410 -792,-412 -792,-2"/>
+  </object>
+ </objectgroup>
  <objectgroup id="7" name="Arbre">
   <object id="223" gid="352" x="1153.62" y="888.431" width="32" height="32"/>
   <object id="224" gid="353" x="1160.56" y="923.267" width="32" height="32"/>
@@ -3740,4 +3754,14 @@
 0,0,435,0,473,0,0,0,435,0,0,0,473,0,0,473,0,0,473,0,0,435,0,0,0,0,0,0,0,0,0,605,606,0,0,0,0,473,0,0,0,605,606,473,0,0,437,0,473,0
 </data>
  </layer>
+ <objectgroup id="9" name="Lien_Carte3">
+  <object id="5113" x="1072" y="-24" width="150" height="48">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="10" name="Lien_Cartef">
+  <object id="5114" x="786" y="938" width="116" height="32">
+   <ellipse/>
+  </object>
+ </objectgroup>
 </map>

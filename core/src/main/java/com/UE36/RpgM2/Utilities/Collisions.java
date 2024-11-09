@@ -41,8 +41,8 @@ public class Collisions {
         ArrayList<PolygonMapObject> collisionObjects = getCollisionObjects();
         for (PolygonMapObject polygonObject : collisionObjects) {
             Polygon polygon = polygonObject.getPolygon();
-            if (polygon.contains(newPosition.x, newPosition.y)) {
-
+            if (polygon.contains(newPosition.x + 15, newPosition.y + 15)) {
+                // +15 = corrige plus ou moins l'offset des bordures due à la vue de la caméra
                 return true;
             }
         }

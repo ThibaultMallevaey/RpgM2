@@ -3,12 +3,11 @@ package com.UE36.RpgM2.Screens;
 import com.UE36.RpgM2.MainCharacter;
 import com.UE36.RpgM2.RpgGame;
 import com.UE36.RpgM2.Utilities.MapObjectRendering;
-import com.badlogic.gdx.Gdx;
+import com.UE36.RpgM2.Utilities.Transitions;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class Map2 extends RpgScreen{
@@ -17,49 +16,35 @@ public class Map2 extends RpgScreen{
     private TiledMap map;
     private OrthogonalTiledMapRenderer mapRenderer;
     private MapObjectRendering mapObjectRendering;
+    private Transitions transitions;
 
 
-    public Map2(RpgGame game) {
-        super(game);
-
-        mainCharacter = game.getMainCharacter();
-        mainCharacter.setPosition(new Vector2(100, 100));
-
+    public Map2(RpgGame game, Vector2 position) {
+        super(game, position);
+        this.mainCharacter = game.getMainCharacter();
+        setUpMainCharacter(mainCharacter, position, 500);
         map = new TmxMapLoader().load("Maps/Carte2.tmx");
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
-
-        camera = new OrthographicCamera(); // idem pour la caméra du joueur
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-
     }
     @Override
     public void show() {
     }
 
     @Override
+    protected void logic(){
+        this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
+        if (transitions.onTransition("Lien_Carte3")){
+            game.setScreen(new Map3(game, new Vector2(1128, 15)));
+        } else if (transitions.onTransition("Lien_Cartef")) {
+            game.setScreen(new ParcValrose(game, new Vector2(820, 900)));
+        }
+    }
+
+    @Override
     public void render(float delta) {
-        // Tout ce qui est relatif à render = dessiner sur le jeu
-
-        // On update les infos du perso
-        mainCharacter.update(delta, map);
-
-        // Mettre la caméra sur la position du perso
-        camera.position.x = mainCharacter.getPosition().x;
-        camera.position.y = mainCharacter.getPosition().y;
-
-        //Bloquer la caméra sur les bords de map
-        camera.position.x = MathUtils.clamp(mainCharacter.getPosition().x, camera.viewportWidth / 2f, map.getProperties().get("width", Integer.class) * 32 - camera.viewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(mainCharacter.getPosition().y, camera.viewportHeight / 2f, map.getProperties().get("height", Integer.class) * 32 - camera.viewportHeight / 2f);
-
-        // update la caméra et on render ce que l'on peut voir sur la caméra
-        camera.update();
-        mapRenderer.setView(camera);
-
-        mapRenderer.render();
-        batch.setProjectionMatrix(camera.combined);
-
+        logic();
+        basicRendering(delta, map, mapRenderer, mainCharacter);
         // initialisation du batch : render les objets
         batch.begin();
         mapObjectRendering.renderLayerObjectsByTexture("Arbre", "Arbre.png");
