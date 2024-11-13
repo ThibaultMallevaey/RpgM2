@@ -21,7 +21,7 @@ public class MainCharacter {
     public MainCharacter(String texturePath) {
         texture = new Texture(texturePath);
         health = 100;
-        scale = 0.25f;
+        scale = 0.2f;
         speed = 100;
         touchPos = new Vector2();
         this.collisions = new Collisions(this);
