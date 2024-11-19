@@ -1,6 +1,7 @@
 package com.UE36.RpgM2.Screens;
 
 import com.UE36.RpgM2.MainCharacter;
+import com.UE36.RpgM2.NPC;
 import com.UE36.RpgM2.RpgGame;
 import com.UE36.RpgM2.Utilities.*;
 import com.badlogic.gdx.Gdx;
@@ -18,6 +19,7 @@ public class ParcValrose extends RpgScreen {
     private OrthogonalTiledMapRenderer mapRenderer;
     private MapObjectRendering mapObjectRendering;
     private Transitions transitions;
+    private NPC npc;
 
     public ParcValrose(RpgGame game, Vector2 position) {
         //Constructeur
@@ -27,7 +29,7 @@ public class ParcValrose extends RpgScreen {
         map = new TmxMapLoader().load("Maps/carteF.tmx"); // charger la map (provisoir si on doit l faire en Json?)
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
-
+        this.npc = new NPC("npc_2.png", game, new Vector2(500, 500));
     }
     @Override
     public void show() {
@@ -55,6 +57,7 @@ public class ParcValrose extends RpgScreen {
         mapObjectRendering.renderLayerObjectsByTileId("acceuil");
         mapObjectRendering.renderLayerObjectsByTileId("Collision");
         mainCharacter.render(batch); // render le perso
+        npc.render(batch);
         batch.end();
 
     }
