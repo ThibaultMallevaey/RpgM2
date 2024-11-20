@@ -24,14 +24,18 @@ public class ParcValrose extends RpgScreen {
     public ParcValrose(RpgGame game, Vector2 position) {
         //Constructeur
         super(game, position);
+
         this.mainCharacter = game.getMainCharacter();
         setUpMainCharacter(mainCharacter, position, 500);
+
         map = new TmxMapLoader().load("Maps/carteF.tmx"); // charger la map (provisoire si on doit l faire en Json?)
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
+
         this.npc = new NPC("npc_2.png", game, new Vector2(500, 500));
         npc.setScale(0.23f);
     }
+
     @Override
     public void show() {
     }
