@@ -24,6 +24,10 @@ public class NPC {
         scale = 0.5f;
     }
 
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
     public Vector2 getPosition() {
         return position;
     }
