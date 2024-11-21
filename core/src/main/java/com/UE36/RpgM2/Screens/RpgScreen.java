@@ -1,6 +1,6 @@
 package com.UE36.RpgM2.Screens;
 
-import com.UE36.RpgM2.MainCharacter;
+import com.UE36.RpgM2.Characters.MainCharacter;
 import com.UE36.RpgM2.RpgGame;
 import com.UE36.RpgM2.Utilities.MapObjectRendering;
 import com.UE36.RpgM2.Utilities.Transitions;

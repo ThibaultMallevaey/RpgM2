@@ -1,6 +1,6 @@
 package com.UE36.RpgM2.Utilities;
 
-import com.UE36.RpgM2.MainCharacter;
+import com.UE36.RpgM2.Characters.MainCharacter;
 import com.UE36.RpgM2.RpgGame;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;

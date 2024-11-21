@@ -1,19 +1,13 @@
 package com.UE36.RpgM2;
 
-import com.UE36.RpgM2.Screens.ParcValrose;
-import com.UE36.RpgM2.Screens.RpgScreen;
+import com.UE36.RpgM2.Characters.MainCharacter;
 import com.UE36.RpgM2.Screens.StartScreen;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Color;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-
-import java.awt.*;
 
 public class RpgGame extends Game {
 
@@ -26,12 +20,10 @@ public class RpgGame extends Game {
     @Override
     public void create() {
         this.font = new BitmapFont(Gdx.files.internal("white.fnt"));
-        font.setColor(Color.WHITE);
         batch = new SpriteBatch();
-        mainCharacter = new MainCharacter("test.png");
+        mainCharacter = new MainCharacter("test.png", this);
 
-        setScreen(new StartScreen(this)); // Définir ParcValrose en tant qu'écran
-        // de début (peut être en faire un dédié ?)
+        setScreen(new StartScreen(this));
     }
 
     public BitmapFont getFont() {

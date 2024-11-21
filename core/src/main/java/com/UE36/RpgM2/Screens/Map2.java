@@ -1,9 +1,10 @@
 package com.UE36.RpgM2.Screens;
 
-import com.UE36.RpgM2.MainCharacter;
+import com.UE36.RpgM2.Characters.MainCharacter;
 import com.UE36.RpgM2.RpgGame;
 import com.UE36.RpgM2.Utilities.MapObjectRendering;
 import com.UE36.RpgM2.Utilities.Transitions;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -17,6 +18,7 @@ public class Map2 extends RpgScreen{
     private OrthogonalTiledMapRenderer mapRenderer;
     private MapObjectRendering mapObjectRendering;
     private Transitions transitions;
+    private OrthographicCamera uiCamera;
 
 
     public Map2(RpgGame game, Vector2 position) {
@@ -26,6 +28,9 @@ public class Map2 extends RpgScreen{
         map = new TmxMapLoader().load("Maps/Carte2.tmx");
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
+        uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+        uiCamera.update();
     }
     @Override
     public void show() {
@@ -50,8 +55,8 @@ public class Map2 extends RpgScreen{
         mapObjectRendering.renderLayerObjectsByTexture("Arbre", "Arbre.png");
         mapObjectRendering.renderLayerObjectsByTileId("fleur");
         mapObjectRendering.renderLayerObjectsByTileId("ScienceNat");
-        mainCharacter.render(batch); // render le perso
         batch.end();
+        mainCharacter.render(batch, uiCamera);
 
     }
 
