@@ -62,7 +62,7 @@ public class Dialogue {
             font.draw(batch, texte.get(currentLineIndex), boxX + 20, boxY + boxHeight - 20); // Position text within the box
             batch.end();
 
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed((Input.Keys.E))){
                 if (!waitingForKeyRelease) {
                     waitingForKeyRelease = true;
                     currentLineIndex++;

@@ -16,7 +16,6 @@ public class MainCharacter {
     // Classe pour gérer tout ce qui est relatif au perso principal
     private Texture texture;
     private Vector2 position;
-    private Vector2 touchPos;
     private int health;
     private float scale;
     private float speed;
@@ -31,7 +30,6 @@ public class MainCharacter {
         health = 100;
         scale = 0.2f;
         speed = 100;
-        touchPos = new Vector2();
         this.game = game;
         this.collisions = new Collisions(this);
         this.inventory = new CharacterInventory();
@@ -114,7 +112,7 @@ public class MainCharacter {
         batch.begin();
         font.getData().setScale(0.5f);
         for (QuestObject objet : inventory.getQuestObjects()) {
-            font.draw(batch, objet.getObjectName(), boxX + 20, boxY + boxHeight - 20);
+            font.draw(batch, objet.getObjectName() + " : " + objet.getStats(), boxX + 20, boxY + boxHeight - 20);
         }// Position text within the box
         batch.end();
     }

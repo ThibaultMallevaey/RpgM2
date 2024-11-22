@@ -46,7 +46,7 @@ public class ParcValrose extends RpgScreen {
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
         uiCamera.update();
 
-        mainCharacter.inventory.addQuestObject(new QuestObject("Test"));
+        mainCharacter.inventory.addQuestObject(new QuestObject("Test", "Speed + 10"));
     }
 
     @Override
