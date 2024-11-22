@@ -1,6 +1,6 @@
 package com.UE36.RpgM2.Screens;
 
-import com.UE36.RpgM2.MainCharacter;
+import com.UE36.RpgM2.Characters.MainCharacter;
 import com.UE36.RpgM2.RpgGame;
 import com.UE36.RpgM2.Utilities.MapObjectRendering;
 import com.UE36.RpgM2.Utilities.Transitions;
@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class Map3 extends RpgScreen{
@@ -19,6 +18,7 @@ public class Map3 extends RpgScreen{
     private OrthogonalTiledMapRenderer mapRenderer;
     private MapObjectRendering mapObjectRendering;
     private Transitions transitions;
+    private OrthographicCamera uiCamera;
 
     public Map3(RpgGame game, Vector2 position) {
         super(game, position);
@@ -27,6 +27,9 @@ public class Map3 extends RpgScreen{
         map = new TmxMapLoader().load("Maps/Carte3.tmx");
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
+        uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+        uiCamera.update();
     }
 
     @Override
@@ -52,8 +55,9 @@ public class Map3 extends RpgScreen{
         mapObjectRendering.renderLayerObjectsByTexture("arbre", "Arbre.png");
         mapObjectRendering.renderLayerObjectsByTileId("Chimie1");
         mapObjectRendering.renderLayerObjectsByTileId("minichateau");
-        mainCharacter.render(batch); // render le perso
         batch.end();
+        mainCharacter.render(batch, uiCamera); // render le perso
+
 
     }
 
