@@ -5,8 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +16,20 @@ import com.UE36.RpgM2.Utilities.Collisions;
 
 public class MainCharacter {
     // Classe pour gérer tout ce qui est relatif au perso principal
-    private Texture texture;
+
+
+    // Animations pour chaque direction
+    private Animation<TextureRegion> walkDown;
+    private Animation<TextureRegion> walkDownRight;
+    private Animation<TextureRegion> walkRight;
+    private Animation<TextureRegion> walkUpRight;
+    private Animation<TextureRegion> walkUp;
+    private Animation<TextureRegion> walkUpLeft;
+    private Animation<TextureRegion> walkLeft;
+    private Animation<TextureRegion> walkDownLeft;
+    private Animation<TextureRegion> walkDownRightRepeat; // Répétition de la ligne 2
+    private TextureRegion currentFrame;
+    private float stateTime; // Temps écoulé pour l'animation
     private Vector2 position;
     private int health;
     private float scale;
@@ -26,9 +41,29 @@ public class MainCharacter {
     private Boolean waitingForKeyRelease;
 
     public MainCharacter(String texturePath, RpgGame game) {
-        texture = new Texture(texturePath);
+        Texture spriteSheet = new Texture("SpriteSheet.png");
+
+        int FRAME_COLS = 4;  // 4 images par ligne
+        int FRAME_ROWS = 9;  // 9 lignes
+
+        // Division des sprites en régions (en utilisant la méthode de découpe manuelle)
+        walkDown = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 0); // Bas
+        walkDownRight = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 1); // Bas et droite
+        walkRight = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 2); // Droite
+        walkUpRight = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 3); // Haut et droite
+        walkUp = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 4); // Haut
+        walkUpLeft = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 5); // Haut et gauche
+        walkLeft = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 6); // Gauche
+        walkDownLeft = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 7); // Bas et gauche
+        walkDownRightRepeat = createAnimation(spriteSheet, 23, 36, FRAME_COLS, 8); // Répétition de la ligne 2
+
+        // Initialisation
+        currentFrame = walkDown.getKeyFrame(0); // Par défaut, face vers le bas
+        stateTime = 0f;
+
+
         health = 100;
-        scale = 0.2f;
+        scale = 1.3f;
         speed = 100;
         this.game = game;
         this.collisions = new Collisions(this);
@@ -37,12 +72,29 @@ public class MainCharacter {
         this.waitingForKeyRelease = false;
 
     }
+    // Méthode de découpe des animations avec une ligne spécifique pour chaque direction
+    private Animation<TextureRegion> createAnimation(Texture texture, int cellWidth, int cellHeight, int cols, int row) {
+        // Créer un tableau de frames pour une ligne donnée
+        TextureRegion[] frames = new TextureRegion[cols];
+        for (int col = 0; col < cols; col++) {
+            // Calculer la position de chaque frame
+            int x = col * cellWidth;  // Position horizontale de la frame
+            int y = row * cellHeight; // Position verticale de la frame
+            // Ajouter la frame à l'array
+            frames[col] = new TextureRegion(texture, x, y, cellWidth, cellHeight);
+        }
+        // Retourner l'animation avec les frames découpées
+        return new Animation<>(0.1f, frames);
+    }
 
     public void render(SpriteBatch batch, OrthographicCamera uiCamera) {
-        float width = texture.getWidth() * scale;
-        float height = texture.getHeight() * scale;
+        stateTime += Gdx.graphics.getDeltaTime();
+
+        float width = currentFrame.getRegionWidth() * scale;
+        float height = currentFrame.getRegionHeight() * scale;
+
         batch.begin();
-        batch.draw(texture, position.x, position.y, width, height);
+        batch.draw(currentFrame, position.x, position.y, width, height);
         batch.end();
         if (Gdx.input.isKeyPressed(Input.Keys.I)) {
             if (!waitingForKeyRelease) { // Only toggle on initial press
@@ -70,23 +122,57 @@ public class MainCharacter {
     }
 
     private void processInput(float delta, TiledMap map) {
-        // gérer les inputs
         Vector2 newPosition = new Vector2(position);
         collisions.setMap(map);
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        boolean moving = false;
+
+        // Déplacer le personnage dans les différentes directions et mettre à jour l'animation
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) { // Haut
             newPosition.y += speed * delta;
+            currentFrame = walkUp.getKeyFrame(stateTime, true);
+            moving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) { // Bas
             newPosition.y -= speed * delta;
+            currentFrame = walkDown.getKeyFrame(stateTime, true);
+            moving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) { // Gauche
             newPosition.x -= speed * delta;
+            currentFrame = walkLeft.getKeyFrame(stateTime, true);
+            moving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) { // Droite
             newPosition.x += speed * delta;
+            currentFrame = walkRight.getKeyFrame(stateTime, true);
+            moving = true;
         }
 
+        // Détecter les diagonales
+        if (Gdx.input.isKeyPressed(Input.Keys.W) && Gdx.input.isKeyPressed(Input.Keys.D)) { // Haut et Droite
+            currentFrame = walkUpRight.getKeyFrame(stateTime, true);
+            moving = true;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.D)) { // Bas et Droite
+            currentFrame = walkDownRight.getKeyFrame(stateTime, true);
+            moving = true;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.A)) { // Bas et Gauche
+            currentFrame = walkDownLeft.getKeyFrame(stateTime, true);
+            moving = true;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.W) && Gdx.input.isKeyPressed(Input.Keys.A)) { // Haut et Gauche
+            currentFrame = walkUpLeft.getKeyFrame(stateTime, true);
+            moving = true;
+        }
+
+        // Réinitialiser le temps de l'animation si le personnage ne se déplace pas
+        if (!moving) {
+            stateTime = 0;
+        }
+
+        // Vérifier les collisions et mettre à jour la position du personnage
         if (!collisions.doCollide(newPosition)) {
             position.set(newPosition);
         }
@@ -127,7 +213,7 @@ public class MainCharacter {
 
     public void dispose() {
         // récupérer des perf
-        texture.dispose();
+
     }
 
     public int getHealth() {
