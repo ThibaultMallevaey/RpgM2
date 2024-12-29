@@ -21,6 +21,7 @@ public class NPC {
     private ArrayList<String> texte;
     private Dialogue dialogue;
     private Boolean charInteraction;
+    private int nbInteractions;
 
     public NPC(String texturePath, RpgGame game, Vector2 position) {
         this.texture = new Texture(texturePath);
@@ -29,6 +30,8 @@ public class NPC {
         this.scale = 0.5f;
         this.dialogue = new Dialogue(game);
         this.charInteraction = false;
+        this.nbInteractions = 0;
+
 
     }
 
@@ -51,8 +54,11 @@ public class NPC {
 
     public void startDialogue(SpriteBatch batch, OrthographicCamera uiCamera) {
         if (isCharacterNearby() & charInteraction) {
+            if (nbInteractions == 0) {
+                character.inventory.addQuestObject(new QuestObject("guide du nouvel arrivant"));
+            }
+            nbInteractions += 1;
             dialogue.render(batch, uiCamera);
-            character.inventory.addQuestObject(new QuestObject("guide du nouvel arrivant"));
         }
     }
 
@@ -73,5 +79,9 @@ public class NPC {
     public void dispose() {
         texture.dispose();
         dialogue.dispose();
+    }
+
+    public int getNbInteractions() {
+        return nbInteractions;
     }
 }
