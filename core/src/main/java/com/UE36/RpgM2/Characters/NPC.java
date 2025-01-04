@@ -22,8 +22,10 @@ public class NPC {
     private Dialogue dialogue;
     private Boolean charInteraction;
     private int nbInteractions;
+    private String name;
 
-    public NPC(String texturePath, RpgGame game, Vector2 position) {
+    public NPC(String name, String texturePath, RpgGame game, Vector2 position) {
+        this.name = name;
         this.texture = new Texture(texturePath);
         this.position = position;
         this.character = game.getMainCharacter();
@@ -31,8 +33,18 @@ public class NPC {
         this.dialogue = new Dialogue(game);
         this.charInteraction = false;
         this.nbInteractions = 0;
+    }
 
-
+    public NPC(String name, String texturePath, RpgGame game, Vector2 position, float scale, ArrayList<String> texte) {
+        this.name = name;
+        this.texture = new Texture(texturePath);
+        this.position = position;
+        this.character = game.getMainCharacter();
+        this.dialogue = new Dialogue(game);
+        dialogue.addMultipleLines(texte);
+        this.charInteraction = false;
+        this.nbInteractions = 0;
+        this.scale = scale;
     }
 
     public boolean isCharacterNearby() {
@@ -40,7 +52,11 @@ public class NPC {
         return distanceSquared < 5000;
     }
 
-    public void setDialogueLines(ArrayList<String> lines) {
+    public void addSingleDialogueLine(String line) {
+        dialogue.addLine(line);
+    }
+
+    public void addDialogueLines(ArrayList<String> lines) {
         dialogue.addMultipleLines(lines);
     }
 
@@ -48,7 +64,7 @@ public class NPC {
         this.scale = scale;
     }
 
-    public void isCharcterInteracting(){
+    public void isCharacterInteracting(){
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {this.charInteraction = true;}
     }
 
@@ -72,7 +88,7 @@ public class NPC {
         batch.begin();
         render(batch);
         batch.end();
-        isCharcterInteracting();
+        isCharacterInteracting();
         startDialogue(batch, uiCamera);
     }
 
@@ -83,5 +99,9 @@ public class NPC {
 
     public int getNbInteractions() {
         return nbInteractions;
+    }
+
+    public String getName() {
+        return name;
     }
 }

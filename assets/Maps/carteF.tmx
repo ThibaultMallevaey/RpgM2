@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="2465">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="2469">
  <tileset firstgid="1" name="building" tilewidth="32" tileheight="32" tilecount="216" columns="18">
   <image source="../Asset/image/building.png" width="576" height="384"/>
  </tileset>
@@ -1350,10 +1350,18 @@
   <object id="396" gid="724" x="1422.93" y="250.603" width="50" height="50"/>
  </objectgroup>
  <objectgroup id="17" name="Lien_Carte2">
-  <object id="2463" x="779.689" y="-20.4643" width="137.111" height="42.975">
+  <object id="2463" x="763.438" y="-18.1428" width="171.934" height="49.9396">
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup id="16" name="TransitionAcceuil"/>
- <objectgroup id="15" name="TransitionPV"/>
+ <objectgroup id="16" name="TransitionAcceuil">
+  <object id="2465" x="1396.4" y="441.091" width="83.5752" height="63.8421">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="15" name="TransitionPV">
+  <object id="2468" x="241.439" y="305.281" width="160.186" height="53.3952">
+   <ellipse/>
+  </object>
+ </objectgroup>
 </map>

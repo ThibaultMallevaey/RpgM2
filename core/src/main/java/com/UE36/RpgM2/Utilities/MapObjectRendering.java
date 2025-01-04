@@ -59,39 +59,41 @@ public class MapObjectRendering {
         // render les objets directement depuis les tilesets
         MapLayer layer = map.getLayers().get(layerName);
         ArrayList<MapObject> objects = getMapObjects(layerName);
+        if (!objects.isEmpty()){
 
-        for (MapObject object : objects) {
-            // récupérer les propriétés de chaque objet pour les positionner correctement
-            float x = (float) object.getProperties().get("x");
-            float y = (float) object.getProperties().get("y");
-            float width = (float) object.getProperties().get("width");
-            float height = (float) object.getProperties().get("height");
+            for (MapObject object : objects) {
+                // récupérer les propriétés de chaque objet pour les positionner correctement
+                float x = (float) object.getProperties().get("x");
+                float y = (float) object.getProperties().get("y");
+                float width = (float) object.getProperties().get("width");
+                float height = (float) object.getProperties().get("height");
 
-            float originX = width / 2;
-            float originY = height / 2;
+                float originX = width / 2;
+                float originY = height / 2;
 
-            float scaleX = object.getProperties().containsKey("scaleX")
-                ? (float) object.getProperties().get("scaleX")
-                : 1f;
+                float scaleX = object.getProperties().containsKey("scaleX")
+                    ? (float) object.getProperties().get("scaleX")
+                    : 1f;
 
-            float scaleY = object.getProperties().containsKey("scaleY")
-                ? (float) object.getProperties().get("scaleY")
-                : 1f;
+                float scaleY = object.getProperties().containsKey("scaleY")
+                    ? (float) object.getProperties().get("scaleY")
+                    : 1f;
 
-            float rotation = object.getProperties().containsKey("rotation")
-                ? (float) object.getProperties().get("rotation")
-                : 0f;
+                float rotation = object.getProperties().containsKey("rotation")
+                    ? (float) object.getProperties().get("rotation")
+                    : 0f;
 
 
 
-            Integer gid = object.getProperties().get("gid", Integer.class);
-            if (gid != null) {
-                TiledMapTile tile = map.getTileSets().getTile(gid);
-                if (tile != null) {
-                    if (rotation != 0) {
-                        System.out.println("Rendering tile: " + gid + " at (" + x + ", " + y + ") with rotation: " + rotation);
+                Integer gid = object.getProperties().get("gid", Integer.class);
+                if (gid != null) {
+                    TiledMapTile tile = map.getTileSets().getTile(gid);
+                    if (tile != null) {
+                        if (rotation != 0) {
+                            System.out.println("Rendering tile: " + gid + " at (" + x + ", " + y + ") with rotation: " + rotation);
+                        }
+                        batch.draw(tile.getTextureRegion(), x, y, originX, originY, width, height, scaleX, scaleY, rotation);
                     }
-                    batch.draw(tile.getTextureRegion(), x, y, originX, originY, width, height, scaleX, scaleY, rotation);
                 }
             }
         }

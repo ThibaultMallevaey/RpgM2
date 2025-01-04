@@ -1,6 +1,7 @@
 package com.UE36.RpgM2.Screens;
 
 import com.UE36.RpgM2.RpgGame;
+import com.UE36.RpgM2.Screens.Exteriors.ParcValrose;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="5119">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="5120">
  <tileset firstgid="1" source="../set/Serene_Village_32x32.tsx"/>
  <tileset firstgid="856" source="../Asset/tile_set/building2_50.tsx"/>
  <layer id="1" name="arriere plan " width="50" height="30">
@@ -3754,6 +3754,11 @@
 0,0,435,0,473,0,0,0,435,0,0,0,473,0,0,473,0,0,473,0,0,435,0,0,0,0,0,0,0,0,0,605,606,0,0,0,0,473,0,0,0,605,606,473,0,0,437,0,473,0
 </data>
  </layer>
+ <objectgroup id="12" name="TransitionSN">
+  <object id="5119" x="1358.14" y="349.147" width="112.281" height="58.4475">
+   <ellipse/>
+  </object>
+ </objectgroup>
  <objectgroup id="9" name="Lien_Carte3">
   <object id="5113" x="1050.47" y="-24" width="209.986" height="54.1524">
    <ellipse/>

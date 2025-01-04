@@ -1,6 +1,7 @@
 package com.UE36.RpgM2.Screens;
 
 import com.UE36.RpgM2.Characters.MainCharacter;
+import com.UE36.RpgM2.Characters.NPC;
 import com.UE36.RpgM2.RpgGame;
 import com.UE36.RpgM2.Utilities.MapObjectRendering;
 import com.UE36.RpgM2.Utilities.Transitions;
@@ -8,11 +9,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+
+import java.util.ArrayList;
 
 /** First screen of the application. Displayed after the application is created. */
 public abstract class RpgScreen implements Screen {
@@ -26,6 +30,7 @@ public abstract class RpgScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer mapRenderer;
     private Transitions transitions;
+    protected ArrayList<NPC> npcs;
 
     public RpgScreen(RpgGame game, Vector2 position) {
         this.game = game;
@@ -33,6 +38,9 @@ public abstract class RpgScreen implements Screen {
         this.camera = new OrthographicCamera(); // idem pour la caméra du joueur
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+        this.npcs = new ArrayList<NPC>();
+
     }
     protected void setUpMainCharacter(MainCharacter mainCharacter, Vector2 position, int speed) {
         mainCharacter.setPosition(position);
@@ -53,6 +61,13 @@ public abstract class RpgScreen implements Screen {
     }
 
     protected void basicRendering(float delta, TiledMap map, MapRenderer mapRenderer, MainCharacter mainCharacter){
+
+        ShapeRenderer shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(1, 1, 1, 1);
+        shapeRenderer.rect(0, 0, map.getProperties().get("width", Integer.class), map.getProperties().get("height", Integer.class));
+        shapeRenderer.end();
         // Tout ce qui est relatif à render = dessiner sur le jeu
         mainCharacter.update(delta, map);
         // Mettre la caméra sur la position du perso
@@ -68,6 +83,10 @@ public abstract class RpgScreen implements Screen {
     }
 
     protected abstract void logic();
+
+    public void addNpc(String name, String texturePath, ArrayList<String> texte, Vector2 position, float scale) {
+        npcs.add(new NPC(name, texturePath, game, position, scale, texte));
+    }
 
     @Override
     public void render(float delta) {
@@ -97,5 +116,7 @@ public abstract class RpgScreen implements Screen {
     @Override
     public void dispose() {
         // Destroy screen's assets here.
+        mapRenderer.dispose();
+        batch.dispose();
     }
 }

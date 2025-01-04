@@ -96,13 +96,16 @@ public class MainCharacter {
         batch.begin();
         batch.draw(currentFrame, position.x, position.y, width, height);
         batch.end();
+
+        System.out.println(getPosition());
+
         if (Gdx.input.isKeyPressed(Input.Keys.I)) {
-            if (!waitingForKeyRelease) { // Only toggle on initial press
-                isInventoryOpen = !isInventoryOpen; // Toggle inventory state
+            if (!waitingForKeyRelease) {
+                isInventoryOpen = !isInventoryOpen;
                 waitingForKeyRelease = true;
             }
         } else {
-            waitingForKeyRelease = false; // Reset flag when key is released
+            waitingForKeyRelease = false;
         }
 
         // Render inventory if it's open

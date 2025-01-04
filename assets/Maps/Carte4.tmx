@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="9181">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="9182">
  <tileset firstgid="1" source="../set/Serene_Village_32x32.tsx"/>
  <tileset firstgid="856" source="../Asset/tile_set/building2_50.tsx"/>
  <layer id="1" name="Arriere_plan" width="50" height="30">
@@ -5771,6 +5771,11 @@
   <object id="75" gid="940" x="1146.19" y="196.163" width="55.113" height="55.113"/>
   <object id="76" gid="940" x="1102.89" y="196.421" width="55.113" height="55.113"/>
   <object id="77" gid="935" x="1048.12" y="196.381" width="55.113" height="55.113"/>
+ </objectgroup>
+ <objectgroup id="8" name="TransitionBiblio">
+  <object id="9181" x="1002.84" y="373.756" width="46.1428" height="58.4475">
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="Collision">
   <object id="9178" x="-8" y="314">
