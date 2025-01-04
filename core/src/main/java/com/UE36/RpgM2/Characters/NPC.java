@@ -12,13 +12,10 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 
 public class NPC {
-    private RpgGame game;
-    private SpriteBatch batch;
     private Texture texture;
     private Vector2 position;
     private MainCharacter character;
     private float scale;
-    private ArrayList<String> texte;
     private Dialogue dialogue;
     private Boolean charInteraction;
     private int nbInteractions;

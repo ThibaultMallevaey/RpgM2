@@ -83,15 +83,10 @@ public class MapObjectRendering {
                     ? (float) object.getProperties().get("rotation")
                     : 0f;
 
-
-
                 Integer gid = object.getProperties().get("gid", Integer.class);
                 if (gid != null) {
                     TiledMapTile tile = map.getTileSets().getTile(gid);
                     if (tile != null) {
-                        if (rotation != 0) {
-                            System.out.println("Rendering tile: " + gid + " at (" + x + ", " + y + ") with rotation: " + rotation);
-                        }
                         batch.draw(tile.getTextureRegion(), x, y, originX, originY, width, height, scaleX, scaleY, rotation);
                     }
                 }

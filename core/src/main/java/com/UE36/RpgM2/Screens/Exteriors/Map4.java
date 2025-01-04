@@ -23,10 +23,9 @@ public class Map4 extends RpgScreen {
     private OrthographicCamera uiCamera;
 
 
-    public Map4(RpgGame game, Vector2 position) {
-        super(game, position);
+    public Map4(RpgGame game) {
+        super(game);
         this.mainCharacter = game.getMainCharacter();
-        setUpMainCharacter(mainCharacter, position, 500);
         map = new TmxMapLoader().load("Maps/Carte4.tmx");
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
@@ -42,9 +41,11 @@ public class Map4 extends RpgScreen {
     protected void logic(){
         this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("Lien_Carte3")){
-            game.setScreen(new Map3(game, new Vector2(1550, 475)));
+            game.setScreen(game.map3);
+            game.map3.setUpMainCharacter(mainCharacter, new Vector2(1550, 475), mainCharacter.getSpeed());
         } else if (transitions.onTransition("TransitionBiblio")){
-            game.setScreen(new Biblio(game, new Vector2(679, 573)));
+            game.setScreen(game.biblio);
+            game.biblio.setUpMainCharacter(mainCharacter, new Vector2(679, 573), mainCharacter.getSpeed());
         }
     }
 

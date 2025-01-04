@@ -32,7 +32,7 @@ public abstract class RpgScreen implements Screen {
     private Transitions transitions;
     protected ArrayList<NPC> npcs;
 
-    public RpgScreen(RpgGame game, Vector2 position) {
+    public RpgScreen(RpgGame game) {
         this.game = game;
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera(); // idem pour la caméra du joueur
@@ -42,14 +42,14 @@ public abstract class RpgScreen implements Screen {
         this.npcs = new ArrayList<NPC>();
 
     }
-    protected void setUpMainCharacter(MainCharacter mainCharacter, Vector2 position, int speed) {
+
+    public void setUpMainCharacter(MainCharacter mainCharacter, Vector2 position, int speed) {
         mainCharacter.setPosition(position);
         mainCharacter.setSpeed(speed);
     };
 
     @Override
     public void show() {
-        // Prepare your screen here.
     }
 
     protected void clampCameraToMapBounds(TiledMap map) {
@@ -90,32 +90,31 @@ public abstract class RpgScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // Draw your screen here. "delta" is the time since last render in seconds.
+        // render l'écran, delata = temps entre 2 render
     }
 
     @Override
     public void resize(int width, int height) {
-        // Resize your screen here. The parameters represent the new window size.
+        // Redimensionner l'écran
     }
 
     @Override
     public void pause() {
-        // Invoked when your application is paused.
+
     }
 
     @Override
     public void resume() {
-        // Invoked when your application is resumed after pause.
+
     }
 
     @Override
     public void hide() {
-        // This method is called when another screen replaces this one.
+
     }
 
     @Override
     public void dispose() {
-        // Destroy screen's assets here.
         mapRenderer.dispose();
         batch.dispose();
     }

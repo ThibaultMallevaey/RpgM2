@@ -33,7 +33,7 @@ public class MainCharacter {
     private Vector2 position;
     private int health;
     private float scale;
-    private float speed;
+    private int speed;
     private Collisions collisions;
     public CharacterInventory inventory;
     private RpgGame game;
@@ -97,8 +97,6 @@ public class MainCharacter {
         batch.draw(currentFrame, position.x, position.y, width, height);
         batch.end();
 
-        System.out.println(getPosition());
-
         if (Gdx.input.isKeyPressed(Input.Keys.I)) {
             if (!waitingForKeyRelease) {
                 isInventoryOpen = !isInventoryOpen;
@@ -108,7 +106,7 @@ public class MainCharacter {
             waitingForKeyRelease = false;
         }
 
-        // Render inventory if it's open
+        // Afficher l'inventaire
         if (isInventoryOpen) {
             displayInventory(batch, uiCamera);
         }
@@ -236,11 +234,11 @@ public class MainCharacter {
         this.scale = scale;
     }
 
-    public float getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(float speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 }

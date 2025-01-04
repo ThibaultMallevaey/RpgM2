@@ -16,13 +16,11 @@ public class Transitions {
     private TiledMap map;
     private MainCharacter mainCharacter;
     private MapLayer transitionLayer;
-    private RpgGame game;
 
     public Transitions(Vector2 position, TiledMap map, MainCharacter mainCharacter) {
         this.position = position;
         this.map = map;
         this.mainCharacter = mainCharacter;
-        this.game = game;
     }
 
     public ArrayList<EllipseMapObject> getTransitionObjects(String layerName) {

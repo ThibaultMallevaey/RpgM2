@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ParcValrose extends RpgScreen {
     private OrthographicCamera camera;
@@ -27,21 +28,15 @@ public class ParcValrose extends RpgScreen {
     private NPC npc;
     private OrthographicCamera uiCamera;
 
-    public ParcValrose(RpgGame game, Vector2 position) {
+    public ParcValrose(RpgGame game) {
         //Constructeur
-        super(game, position);
+        super(game);
 
         this.mainCharacter = game.getMainCharacter();
-        setUpMainCharacter(mainCharacter, position, 500);
 
         map = new TmxMapLoader().load("Maps/carteF.tmx"); // charger la map (provisoire si on doit l faire en Json?)
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
-
-        /*this.npc = new NPC("npc_2.png", game, new Vector2(700, 450));
-        npc.setScale(0.23f);
-
-        npc.setDialogueLines(texte);*/
 
         ArrayList<String> texte = new ArrayList<>();
         texte.add("Bonjour");
@@ -49,7 +44,7 @@ public class ParcValrose extends RpgScreen {
         addNpc("test", "npc_2.png", texte, new Vector2(700, 450), 0.23f);
 
         for (NPC npc : npcs){
-            if (npc.getName() == "test"){
+            if (Objects.equals(npc.getName(), "test")){
                 npc.addSingleDialogueLine("test des dialogues");
             }
         }
@@ -69,12 +64,16 @@ public class ParcValrose extends RpgScreen {
     protected void logic() {
         this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("Lien_Carte2")) {
-            game.setScreen(new Map2(game, new Vector2(830, 5)));
+            game.setScreen(game.map2);
+            game.map2.setUpMainCharacter(mainCharacter, new Vector2(830, 5), 500);
         } else if (transitions.onTransition("TransitionAcceuil")) {
-            game.setScreen(new Acceuil(game, new Vector2(715, 291)));
-        } else if (transitions.onTransition("TransitionPV")) {
-            game.setScreen(new PV(game, new Vector2(1, 1)));
+            game.setScreen(game.acceuil);
+            game.acceuil.setUpMainCharacter(mainCharacter, new Vector2(715, 291), 500);
+        } /*else if (transitions.onTransition("TransitionPV")) {
+            game.setScreen(game.pv);
+            game.pv.setUpMainCharacter(mainCharacter, new Vector2(1, 1), 500);
         }
+        */
     }
 
     @Override

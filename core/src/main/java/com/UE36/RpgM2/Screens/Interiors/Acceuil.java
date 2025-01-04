@@ -26,16 +26,14 @@ public class Acceuil extends RpgScreen {
     private NPC npc;
     private OrthographicCamera uiCamera;
 
-    public Acceuil(RpgGame game, Vector2 position) {
-        super(game, position);
+    public Acceuil(RpgGame game) {
+        super(game);
 
         this.mainCharacter = game.getMainCharacter();
-        setUpMainCharacter(mainCharacter, position, 500);
 
         map = new TmxMapLoader().load("Maps/Acceuil.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         mapObjectRendering = new MapObjectRendering(batch, map);
-
 
         this.uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
@@ -68,7 +66,8 @@ public class Acceuil extends RpgScreen {
     protected void logic() {
         this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("TransitionValrose")){
-            game.setScreen(new ParcValrose(game, new Vector2(1400, 400)));
+            game.setScreen(game.parcValrose);
+            game.parcValrose.setUpMainCharacter(game.getMainCharacter(), new Vector2(1400, 400), mainCharacter.getSpeed());
         }
     }
 }

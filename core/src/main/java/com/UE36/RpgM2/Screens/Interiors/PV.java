@@ -24,16 +24,14 @@ public class PV extends RpgScreen {
     private NPC npc;
     private OrthographicCamera uiCamera;
 
-    public PV(RpgGame game, Vector2 position) {
-        super(game, position);
+    public PV(RpgGame game) {
+        super(game);
 
         this.mainCharacter = game.getMainCharacter();
-        setUpMainCharacter(mainCharacter, position, 500);
 
         map = new TmxMapLoader().load("Maps/PV.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         mapObjectRendering = new MapObjectRendering(batch, map);
-
 
         this.uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);

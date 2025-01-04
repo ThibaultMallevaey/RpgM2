@@ -24,16 +24,14 @@ public class SN2 extends RpgScreen {
     private NPC npc;
     private OrthographicCamera uiCamera;
 
-    public SN2(RpgGame game, Vector2 position) {
-        super(game, position);
+    public SN2(RpgGame game) {
+        super(game);
 
         this.mainCharacter = game.getMainCharacter();
-        setUpMainCharacter(mainCharacter, position, 500);
 
         map = new TmxMapLoader().load("Maps/SN2.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         mapObjectRendering = new MapObjectRendering(batch, map);
-
 
         this.uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
@@ -75,7 +73,8 @@ public class SN2 extends RpgScreen {
     protected void logic() {
         this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("TransitionSN")){
-            game.setScreen(new SN(game, new Vector2(475, 725)));
+            game.setScreen(game.sn);
+            game.sn.setUpMainCharacter(mainCharacter, new Vector2(475, 725), mainCharacter.getSpeed());
         }
     }
 }

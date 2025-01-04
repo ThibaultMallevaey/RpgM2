@@ -96,10 +96,7 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="Lien_Carte2">
-  <object id="4684" x="1074.03" y="940.121" width="151.855" height="26.2295">
-   <ellipse/>
-  </object>
-  <object id="4685" x="1158.24" y="949.784" height="1.3805">
+  <object id="4684" x="1061.73" y="932.431" width="185.693" height="49.3009">
    <ellipse/>
   </object>
  </objectgroup>

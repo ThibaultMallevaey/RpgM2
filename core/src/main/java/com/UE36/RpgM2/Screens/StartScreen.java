@@ -38,7 +38,8 @@ public class StartScreen implements Screen {
 
     public void logic(){
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isTouched()){
-            game.setScreen(new ParcValrose(game, new Vector2(1070, 10)));
+            game.setScreen(game.parcValrose);
+            game.parcValrose.setUpMainCharacter(game.getMainCharacter(), new Vector2(1070, 10), 500);
         }
     }
 

@@ -26,16 +26,14 @@ public class Biblio extends RpgScreen {
     private NPC npc;
     private OrthographicCamera uiCamera;
 
-    public Biblio(RpgGame game, Vector2 position) {
-        super(game, position);
+    public Biblio(RpgGame game) {
+        super(game);
 
         this.mainCharacter = game.getMainCharacter();
-        setUpMainCharacter(mainCharacter, position, 500);
 
         map = new TmxMapLoader().load("Maps/Biblio.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         mapObjectRendering = new MapObjectRendering(batch, map);
-
 
         this.uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
@@ -73,7 +71,8 @@ public class Biblio extends RpgScreen {
     protected void logic() {
         this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("TransitionCarte4")){
-            game.setScreen(new Map4(game, new Vector2(977, 548)));
+            game.setScreen(game.map4);
+            game.map4.setUpMainCharacter(game.getMainCharacter(), new Vector2(977, 548), mainCharacter.getSpeed());
         }
     }
 

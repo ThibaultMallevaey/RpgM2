@@ -244,13 +244,13 @@
    <polygon points="0,0 3.07618,64.5999 196.876,61.5237 192.261,-7.69046"/>
   </object>
  </objectgroup>
- <objectgroup id="12" name="TransitionCarte2">
-  <object id="51" x="790.579" y="838.26" width="167.652" height="59.9856">
+ <objectgroup id="11" name="TransitionSN2">
+  <object id="50" x="390.675" y="158.423" width="158.423" height="49.2189">
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup id="11" name="TransitionSN2">
-  <object id="50" x="390.675" y="158.423" width="158.423" height="49.2189">
+ <objectgroup id="12" name="TransitionCarte2">
+  <object id="51" x="787.503" y="787.503" width="193.8" height="98.4379">
    <ellipse/>
   </object>
  </objectgroup>

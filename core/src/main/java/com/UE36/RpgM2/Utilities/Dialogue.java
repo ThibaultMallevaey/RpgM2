@@ -49,19 +49,24 @@ public class Dialogue {
     }
 
     public void render(SpriteBatch batch, OrthographicCamera uiCamera) {
-        if (texte.isEmpty() || isDialogueComplete()) return;
+        if (texte.isEmpty() || isDialogueComplete()) return; //ne rien afficher si le dialogue est terminé
+
         batch.setProjectionMatrix(uiCamera.combined);
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(uiCamera.combined);
+
         float boxX = 50;
         float boxY = 50;
         float boxWidth = Gdx.graphics.getWidth() - 100;
         float boxHeight = 150;
+
+        //render un rectangle noir de fond
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 0, 0.7f); // Semi-transparent black
-        shapeRenderer.rect(boxX, boxY, boxWidth, boxHeight); // Fixed position on screen
+        shapeRenderer.setColor(0, 0, 0, 0.7f);
+        shapeRenderer.rect(boxX, boxY, boxWidth, boxHeight);
         shapeRenderer.end();
-        // Draw the current line
+
+        // Afficher la ligne actuelle
         batch.begin();
         font.setColor(Color.WHITE);
         font.draw(batch, texte.get(currentLineIndex), boxX + 20, boxY + boxHeight - 20); // Position text within the box
