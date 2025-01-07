@@ -10,6 +10,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+
+import java.util.ArrayList;
 
 public class RpgGame extends Game {
 
@@ -47,6 +50,11 @@ public class RpgGame extends Game {
         //pv = new PV(this);
         sn = new SN(this);
         sn2 = new SN2(this);
+
+        ArrayList<String> texteNpc = new ArrayList<>();
+        texteNpc.add("bonjour");
+        texteNpc.add("Comment allez-vous ?");
+        parcValrose.addNpc("test", "npc_2.png", texteNpc , new Vector2(700, 450), 0.23f);
 
     }
 

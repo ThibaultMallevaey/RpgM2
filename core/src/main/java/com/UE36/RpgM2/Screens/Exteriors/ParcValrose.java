@@ -38,11 +38,6 @@ public class ParcValrose extends RpgScreen {
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
 
-        ArrayList<String> texte = new ArrayList<>();
-        texte.add("Bonjour");
-        texte.add("Comment allez-vous ?");
-        addNpc("test", "npc_2.png", texte, new Vector2(700, 450), 0.23f);
-
         for (NPC npc : npcs){
             if (Objects.equals(npc.getName(), "test")){
                 npc.addSingleDialogueLine("test des dialogues");
