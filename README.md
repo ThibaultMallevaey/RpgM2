@@ -28,7 +28,7 @@ Pour ajouter des cartes dans le jeu, utiliser Tiled pour créer la map. Exporter
 
 Créer une nouvelle classe dans le dossier core/src/main/java/com/UE36/RpgM2/Screens. Nous recommandons pour la clarté 
 de ranger la map dans le package interiors ou exteriors. Pour plus d'aide concernant la création de cette classe, se 
-référer au template fournie dans le dépôt 
+référer au com.UE36.RpgM2.Screens.Template fournie dans le dépôt 
 
 Créer une instance de cette classe dans la méthode create() de la classe RpgGame: 
 ```
