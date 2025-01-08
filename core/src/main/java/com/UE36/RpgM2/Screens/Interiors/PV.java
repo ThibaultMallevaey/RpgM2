@@ -7,6 +7,7 @@ import com.UE36.RpgM2.Screens.RpgScreen;
 import com.UE36.RpgM2.Utilities.MapObjectRendering;
 import com.UE36.RpgM2.Utilities.Transitions;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -29,7 +30,7 @@ public class PV extends RpgScreen {
 
         this.mainCharacter = game.getMainCharacter();
 
-        map = new TmxMapLoader().load("Maps/PV.tmx");
+        map = new TmxMapLoader().load("Maps/Lock.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         mapObjectRendering = new MapObjectRendering(batch, map);
 
@@ -69,6 +70,9 @@ public class PV extends RpgScreen {
 
     @Override
     protected void logic() {
-
+        if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
+            game.setScreen(game.map2);
+            game.map2.setUpMainCharacter(mainCharacter, new Vector2(300, 300), mainCharacter.getSpeed());
+        }
     }
 }
