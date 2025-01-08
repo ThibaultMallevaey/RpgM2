@@ -56,6 +56,9 @@ public class RpgGame extends Game {
         texteNpc.add("Comment allez-vous ?");
         parcValrose.addNpc("test", "npc_2.png", texteNpc , new Vector2(700, 450), 0.23f);
 
+        ArrayList<String> texteMarc = new ArrayList<>();
+        texteMarc.add("Bienvenue a Valrose");
+        acceuil.addNpc("marc", "test.png", texteMarc, new Vector2(737, 466), 0.23f);
     }
 
     public BitmapFont getFont() {

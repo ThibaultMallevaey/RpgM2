@@ -52,6 +52,10 @@ public class Acceuil extends RpgScreen {
 
         mainCharacter.render(batch, uiCamera);
 
+        for (NPC npc : npcs) {
+            npc.update(batch, uiCamera);
+        }
+
     }
 
     @Override
