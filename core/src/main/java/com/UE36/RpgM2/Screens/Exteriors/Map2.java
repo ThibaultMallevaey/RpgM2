@@ -14,13 +14,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class Map2 extends RpgScreen {
-    private OrthographicCamera camera;
-    private MainCharacter mainCharacter;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private MapObjectRendering mapObjectRendering;
-    private Transitions transitions;
-    private OrthographicCamera uiCamera;
+    private final MainCharacter mainCharacter;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final MapObjectRendering mapObjectRendering;
+    private final OrthographicCamera uiCamera;
 
 
     public Map2(RpgGame game) {
@@ -33,13 +31,10 @@ public class Map2 extends RpgScreen {
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
         uiCamera.update();
     }
-    @Override
-    public void show() {
-    }
 
     @Override
     protected void logic(){
-        this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
+        Transitions transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("Lien_Carte3")){
             game.setScreen(game.map3);
             game.map3.setUpMainCharacter(mainCharacter, new Vector2(1128, 15), mainCharacter.getSpeed());
@@ -64,14 +59,6 @@ public class Map2 extends RpgScreen {
         batch.end();
         mainCharacter.render(batch, uiCamera);
 
-    }
-
-    @Override
-    public void dispose() {
-        // permet de nettoyer = améliorer les performances
-        mapRenderer.dispose();
-        batch.dispose();
-        mainCharacter.dispose();
     }
 
 }

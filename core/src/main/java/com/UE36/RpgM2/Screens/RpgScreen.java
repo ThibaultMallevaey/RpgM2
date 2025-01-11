@@ -38,7 +38,6 @@ public abstract class RpgScreen implements Screen {
         this.camera = new OrthographicCamera(); // idem pour la caméra du joueur
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.mapRenderer = new OrthogonalTiledMapRenderer(map);
-
         this.npcs = new ArrayList<NPC>();
 
     }
@@ -117,5 +116,9 @@ public abstract class RpgScreen implements Screen {
     public void dispose() {
         mapRenderer.dispose();
         batch.dispose();
+        mainCharacter.dispose();
+        for (NPC npc : npcs) {
+            npc.dispose();
+        }
     }
 }

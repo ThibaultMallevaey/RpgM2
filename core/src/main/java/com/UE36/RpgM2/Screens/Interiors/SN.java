@@ -17,14 +17,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class SN extends RpgScreen {
-    private OrthographicCamera camera;
-    private MainCharacter mainCharacter;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private MapObjectRendering mapObjectRendering;
-    private Transitions transitions;
-    private NPC npc;
-    private OrthographicCamera uiCamera;
+    private final MainCharacter mainCharacter;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final MapObjectRendering mapObjectRendering;
+    private final OrthographicCamera uiCamera;
 
     public SN(RpgGame game) {
         super(game);
@@ -41,10 +38,6 @@ public class SN extends RpgScreen {
     }
 
     @Override
-    public void show() {
-    }
-
-    @Override
     public void render(float delta) {
         logic();
 
@@ -58,7 +51,6 @@ public class SN extends RpgScreen {
         batch.end();
         mainCharacter.render(batch, uiCamera);
 
-
     }
 
     @Override
@@ -71,7 +63,7 @@ public class SN extends RpgScreen {
 
     @Override
     protected void logic() {
-        this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
+        Transitions transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("TransitionSN2")){
             game.setScreen(game.sn2);
             game.sn2.setUpMainCharacter(game.getMainCharacter(), new Vector2(475, 700), mainCharacter.getSpeed());

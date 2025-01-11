@@ -1,7 +1,6 @@
 package com.UE36.RpgM2.Screens;
 
 import com.UE36.RpgM2.RpgGame;
-import com.UE36.RpgM2.Screens.Exteriors.ParcValrose;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -15,11 +14,11 @@ import com.badlogic.gdx.graphics.Color;
 
 
 public class StartScreen implements Screen {
-    private RpgGame game;
-    private Texture background;
-    private OrthographicCamera camera;
-    BitmapFont font;
-    private SpriteBatch batch;
+    private final RpgGame game;
+    private final Texture background;
+    private final OrthographicCamera camera;
+    public BitmapFont font;
+    private final SpriteBatch batch;
 
     public StartScreen(RpgGame game){
         super();
@@ -45,19 +44,19 @@ public class StartScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0.2f, 1);
+            ScreenUtils.clear(0, 0, 0.2f, 1);
 
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
+            camera.update();
+            batch.setProjectionMatrix(camera.combined);
 
-        batch.begin();
-        batch.draw(background, 0, 0);
-        font.setColor(Color.WHITE);
-        font.draw(batch, "Welcome to RPG !!! ", 100, 150);
-        font.draw(batch,"Tap anywhere to begin!", 100, 100);
-        batch.end();
+            batch.begin();
+            batch.draw(background, 0, 0);
+            font.setColor(Color.WHITE);
+            font.draw(batch, "Welcome to RPG !!! ", 100, 150);
+            font.draw(batch,"Tap anywhere to begin!", 100, 100);
+            batch.end();
 
-        logic();
+            logic();
     }
 
     @Override

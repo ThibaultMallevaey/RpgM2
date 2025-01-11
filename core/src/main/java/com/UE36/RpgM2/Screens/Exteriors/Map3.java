@@ -14,12 +14,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Map3 extends RpgScreen {
     private OrthographicCamera camera;
-    private MainCharacter mainCharacter;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private MapObjectRendering mapObjectRendering;
-    private Transitions transitions;
-    private OrthographicCamera uiCamera;
+    private final MainCharacter mainCharacter;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final MapObjectRendering mapObjectRendering;
+    private final OrthographicCamera uiCamera;
 
     public Map3(RpgGame game) {
         super(game);
@@ -27,18 +26,15 @@ public class Map3 extends RpgScreen {
         map = new TmxMapLoader().load("Maps/Carte3.tmx");
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
-        uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
         uiCamera.update();
-    }
 
-    @Override
-    public void show() {
     }
 
     @Override
     protected void logic(){
-        this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
+        Transitions transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("Lien_Carte2")){
             game.setScreen(game.map2);
             game.map2.setUpMainCharacter(mainCharacter, new Vector2(1128, 900), mainCharacter.getSpeed());
@@ -61,14 +57,6 @@ public class Map3 extends RpgScreen {
         mainCharacter.render(batch, uiCamera); // render le perso
 
 
-    }
-
-    @Override
-    public void dispose() {
-        // permet de nettoyer = améliorer les performances
-        mapRenderer.dispose();
-        batch.dispose();
-        mainCharacter.dispose();
     }
 
 }

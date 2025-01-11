@@ -13,13 +13,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class Template extends RpgScreen{
-    private OrthographicCamera camera;
-    private MainCharacter mainCharacter;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private MapObjectRendering mapObjectRendering;
-    private Transitions transitions;
-    private OrthographicCamera uiCamera;
+    private final MainCharacter mainCharacter;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final MapObjectRendering mapObjectRendering;
+    private final OrthographicCamera uiCamera;
 
     public Template(RpgGame game) {
         super(game);
@@ -27,7 +25,8 @@ public class Template extends RpgScreen{
         // importer le personnage principal
         this.mainCharacter = game.getMainCharacter();
 
-        map = new TmxMapLoader().load("Maps/Map.tmx"); // charger la texture de la map
+        // charger la texture de la map, remplacer Map.tmx avec le bon fichier
+        map = new TmxMapLoader().load("Maps/Map.tmx");
 
         // créer les renderers
         mapObjectRendering = new MapObjectRendering(batch, map);
@@ -40,13 +39,10 @@ public class Template extends RpgScreen{
 
     }
 
-    @Override
-    public void show() {
-    }
 
     @Override
     protected void logic() {
-        this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
+        Transitions transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("TransitionMap2")) {
             game.setScreen(game.map2); // changer vers l'écran de la carte suivante
             // paramétrer le personnage sur la nouvelle map
@@ -56,15 +52,20 @@ public class Template extends RpgScreen{
 
     @Override
     public void render(float delta) {
+        //excétuer la logique du jeu (comme les transitions)
         logic();
+
+        //render du fond de la map et organisation de la caméra
         basicRendering(delta, map, mapRenderer, mainCharacter);
+
         // initialisation du batch : render les objets
         batch.begin();
+
         // render les couches d'objets de la map
         // pour définir une texture pour tous les objets de la couche
         mapObjectRendering.renderLayerObjectsByTexture("Arbre", "Arbre.png");
 
-        // pour render tous le objets
+        // pour render tous le objets d'une couche
         mapObjectRendering.renderLayerObjectsByTileId("info");
 
         batch.end();
@@ -74,13 +75,5 @@ public class Template extends RpgScreen{
         for (NPC npc : npcs) {
             npc.update(batch, uiCamera);
         }
-    }
-
-    @Override
-    public void dispose() {
-        // permet de nettoyer = améliorer les performances
-        mapRenderer.dispose();
-        batch.dispose();
-        mainCharacter.dispose();
     }
 }

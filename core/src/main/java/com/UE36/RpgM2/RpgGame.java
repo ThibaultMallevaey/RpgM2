@@ -47,7 +47,7 @@ public class RpgGame extends Game {
         map4 = new Map4(this);
         acceuil = new Acceuil(this);
         biblio = new Biblio(this);
-        //pv = new PV(this);
+        pv = new PV(this);
         sn = new SN(this);
         sn2 = new SN2(this);
 

@@ -19,14 +19,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ParcValrose extends RpgScreen {
-    private OrthographicCamera camera;
-    private MainCharacter mainCharacter;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private MapObjectRendering mapObjectRendering;
+    private final MainCharacter mainCharacter;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final MapObjectRendering mapObjectRendering;
     private Transitions transitions;
-    private NPC npc;
-    private OrthographicCamera uiCamera;
+    private final OrthographicCamera uiCamera;
 
     public ParcValrose(RpgGame game) {
         //Constructeur
@@ -38,21 +36,11 @@ public class ParcValrose extends RpgScreen {
         mapObjectRendering = new MapObjectRendering(batch, map); // création de l'outil pour render la map
         mapRenderer = new OrthogonalTiledMapRenderer(map); //On définit le render sur orthogonal
 
-        for (NPC npc : npcs){
-            if (Objects.equals(npc.getName(), "test")){
-                npc.addSingleDialogueLine("test des dialogues");
-            }
-        }
-
         uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
         uiCamera.update();
 
         mainCharacter.inventory.addQuestObject(new QuestObject("Test", "Speed + 10"));
-    }
-
-    @Override
-    public void show() {
     }
 
     @Override
@@ -64,6 +52,8 @@ public class ParcValrose extends RpgScreen {
         } else if (transitions.onTransition("TransitionAcceuil")) {
             game.setScreen(game.acceuil);
             game.acceuil.setUpMainCharacter(mainCharacter, new Vector2(715, 291), 500);
+        } else if (transitions.onTransition("TransitionPV")) {
+            game.setScreen(game.pv);
         }
     }
 
@@ -86,15 +76,6 @@ public class ParcValrose extends RpgScreen {
             npc.update(batch, uiCamera);
         }
 
-
     }
 
-    @Override
-    public void dispose() {
-        // permet de nettoyer = améliorer les performances
-        mapRenderer.dispose();
-        batch.dispose();
-        mainCharacter.dispose();
-        npc.dispose();
-    }
 }

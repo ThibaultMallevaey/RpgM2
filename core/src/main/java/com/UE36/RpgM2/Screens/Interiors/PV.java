@@ -1,78 +1,92 @@
 package com.UE36.RpgM2.Screens.Interiors;
 
 import com.UE36.RpgM2.Characters.MainCharacter;
-import com.UE36.RpgM2.Characters.NPC;
 import com.UE36.RpgM2.RpgGame;
 import com.UE36.RpgM2.Screens.RpgScreen;
-import com.UE36.RpgM2.Utilities.MapObjectRendering;
-import com.UE36.RpgM2.Utilities.Transitions;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.ScreenUtils;
 
-public class PV extends RpgScreen {
-    private OrthographicCamera camera;
-    private MainCharacter mainCharacter;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private MapObjectRendering mapObjectRendering;
-    private Transitions transitions;
-    private NPC npc;
-    private OrthographicCamera uiCamera;
+public class PV implements Screen {
+    private final Texture background;
+    private final RpgGame game;
+    private final OrthographicCamera camera;
+    private final SpriteBatch batch;
+    private final MainCharacter mainCharacter;
+    public BitmapFont font;
+
 
     public PV(RpgGame game) {
-        super(game);
-
+        this.game = game;
+        this.background = new Texture(Gdx.files.internal("Asset/image/Lock.png"));
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 800, 480);
+        batch = game.getBatch();
         this.mainCharacter = game.getMainCharacter();
-
-        map = new TmxMapLoader().load("Maps/Lock.tmx");
-        mapRenderer = new OrthogonalTiledMapRenderer(map);
-        mapObjectRendering = new MapObjectRendering(batch, map);
-
-        this.uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        uiCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
-        uiCamera.update();
-
+        this.font = game.getFont();
     }
 
     @Override
     public void show() {
+
     }
 
     @Override
     public void render(float delta) {
-        logic();
-        basicRendering(delta, map, mapRenderer, mainCharacter);
+        ScreenUtils.clear(0, 0, 0.2f, 1);
+
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        for (MapLayer layer : map.getLayers()) {
-            mapObjectRendering.renderLayerObjectsByTileId(layer.toString());
-        }
+        batch.draw(background, 0, 0);
+        font.setColor(Color.WHITE);
+        font.draw(batch, "Under Construction ", 100, 250);
+        font.draw(batch, "Please Come back later!", 100, 200);
+        font.draw(batch, "You may press E to go back", 100, 150);
+
         batch.end();
 
-        mainCharacter.render(batch, uiCamera);
+        logic();
 
+    }
+
+    @Override
+    public void resize(int i, int i1) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
 
     }
 
     @Override
     public void dispose() {
-        mapRenderer.dispose();
-        batch.dispose();
-        mainCharacter.dispose();
 
     }
 
-    @Override
     protected void logic() {
-        if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
-            game.setScreen(game.map2);
-            game.map2.setUpMainCharacter(mainCharacter, new Vector2(300, 300), mainCharacter.getSpeed());
+        if(Gdx.input.isKeyPressed(Input.Keys.E)){
+            game.setScreen(game.parcValrose);
+            game.parcValrose.setUpMainCharacter(mainCharacter, new Vector2(300, 575), mainCharacter.getSpeed());
         }
     }
 }

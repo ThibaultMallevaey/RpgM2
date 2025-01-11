@@ -2,29 +2,23 @@ package com.UE36.RpgM2.Screens.Interiors;
 
 import com.UE36.RpgM2.Characters.MainCharacter;
 import com.UE36.RpgM2.Characters.NPC;
-import com.UE36.RpgM2.Characters.QuestObject;
 import com.UE36.RpgM2.RpgGame;
-import com.UE36.RpgM2.Screens.Exteriors.ParcValrose;
 import com.UE36.RpgM2.Screens.RpgScreen;
 import com.UE36.RpgM2.Utilities.MapObjectRendering;
 import com.UE36.RpgM2.Utilities.Transitions;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class Acceuil extends RpgScreen {
-    private OrthographicCamera camera;
-    private MainCharacter mainCharacter;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private MapObjectRendering mapObjectRendering;
-    private Transitions transitions;
-    private NPC npc;
-    private OrthographicCamera uiCamera;
+    private final MainCharacter mainCharacter;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final MapObjectRendering mapObjectRendering;
+    private final OrthographicCamera uiCamera;
 
     public Acceuil(RpgGame game) {
         super(game);
@@ -42,10 +36,6 @@ public class Acceuil extends RpgScreen {
     }
 
     @Override
-    public void show() {
-    }
-
-    @Override
     public void render(float delta) {
         logic();
         basicRendering(delta, map, mapRenderer, mainCharacter);
@@ -59,16 +49,8 @@ public class Acceuil extends RpgScreen {
     }
 
     @Override
-    public void dispose() {
-        mapRenderer.dispose();
-        batch.dispose();
-        mainCharacter.dispose();
-
-    }
-
-    @Override
     protected void logic() {
-        this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
+        Transitions transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
         if (transitions.onTransition("TransitionValrose")){
             game.setScreen(game.parcValrose);
             game.parcValrose.setUpMainCharacter(game.getMainCharacter(), new Vector2(1400, 400), mainCharacter.getSpeed());
