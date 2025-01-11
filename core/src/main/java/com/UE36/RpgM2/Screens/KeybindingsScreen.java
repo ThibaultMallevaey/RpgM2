@@ -4,62 +4,60 @@ import com.UE36.RpgM2.RpgGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.graphics.Color;
 
+public class KeybindingsScreen implements Screen {
 
-public class StartScreen implements Screen {
     private final RpgGame game;
     private final Texture background;
     private final OrthographicCamera camera;
     public BitmapFont font;
     private final SpriteBatch batch;
 
-    public StartScreen(RpgGame game){
+    public KeybindingsScreen(RpgGame game) {
         super();
         this.game = game;
         font = game.getFont();
-        background = new Texture("StartScreen.jpeg");
+        background = new Texture("KeyBindings.png");
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch = game.getBatch();
 
     }
 
-    public void show(){
-
-    }
-
-    public void logic(){
-        if ((Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isTouched()) & !Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            game.setScreen(new KeybindingsScreen(game));
+    private void logic(){
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isTouched()){
+            game.setScreen(game.parcValrose);
+            game.parcValrose.setUpMainCharacter(game.getMainCharacter(), new Vector2(1070, 10), 500);
         }
     }
 
     @Override
-    public void render(float delta) {
-            ScreenUtils.clear(0, 0, 0.2f, 1);
+    public void show() {
 
-            camera.update();
-            batch.setProjectionMatrix(camera.combined);
-
-            batch.begin();
-            batch.draw(background, 0, 0);
-            font.setColor(Color.WHITE);
-            font.draw(batch, "Welcome to RPG !!! ", 100, 150);
-            font.draw(batch,"Tap anywhere to begin!", 100, 100);
-            batch.end();
-
-            logic();
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void render(float delta) {
+        logic();
+        ScreenUtils.clear(0, 0, 0, 0);
+
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+
+        batch.begin();
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+    }
+
+    @Override
+    public void resize(int i, int i1) {
 
     }
 
