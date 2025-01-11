@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.UE36.RpgM2.Utilities.Collisions;
 
+import java.util.List;
+
 public class MainCharacter {
     // Classe pour gérer tout ce qui est relatif au perso principal
 
@@ -85,6 +87,65 @@ public class MainCharacter {
         }
         // Retourner l'animation avec les frames découpées
         return new Animation<>(0.1f, frames);
+    }
+
+    // Méthode pour afficher l'inventaire
+    public void displayInventory(SpriteBatch batch, OrthographicCamera uiCamera) {
+        BitmapFont font = game.getFont();
+        batch.setProjectionMatrix(uiCamera.combined);
+        ShapeRenderer shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setProjectionMatrix(uiCamera.combined);
+
+        Texture inventoryBackground = new Texture(Gdx.files.internal("inventory/Inventory_9Slices.png"));
+        Texture inventorySlot = new Texture(Gdx.files.internal("inventory/Inventory_Slot_7.png"));
+
+        float boxX = Gdx.graphics.getWidth() / 2;
+        float boxY = Gdx.graphics.getHeight() / 2 - 25;
+        float boxWidth = Gdx.graphics.getWidth() / 2;
+        float boxHeight = Gdx.graphics.getHeight() / 2;
+
+        batch.begin();
+        batch.draw(inventoryBackground, boxX, boxY, boxWidth, boxHeight);
+        batch.end();
+
+        batch.begin();
+        font.getData().setScale(1.5f);
+        font.draw(batch, "Inventaire", boxX + 20, boxY + boxHeight - 20);
+
+        float slotSize = (boxWidth - 40) / 6;
+        float xOffset = boxX + boxWidth - 320;
+        float yOffset = boxY + boxHeight - 110;
+
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                batch.draw(inventorySlot, xOffset + col * (slotSize + 30), yOffset - row * (slotSize + 10), slotSize, slotSize);
+                int index = row * 3 + col;
+                if (index < inventory.getQuestObjects().size()) {
+                    QuestObject objet = inventory.getQuestObjects().get(index);
+                    String iconPath = "icons/" + objet.getObjectName() + ".png";
+                    if (Gdx.files.internal(iconPath).exists()) {
+                        Texture icon = new Texture(Gdx.files.internal(iconPath));
+                        batch.draw(icon, xOffset + col * (slotSize + 10), yOffset - row * (slotSize + 10), slotSize, slotSize);
+                    } else {
+                        Texture defaultIcon = new Texture(Gdx.files.internal("icons/default.png"));
+                        batch.draw(defaultIcon, xOffset + col * (slotSize + 10), yOffset - row * (slotSize + 10), slotSize, slotSize);
+                    }
+                    font.getData().setScale(0.5f);
+                    font.draw(batch, objet.getObjectName(), xOffset + col * (slotSize + 10), yOffset - row * (slotSize + 10) - 10);
+
+                    // Récupérer les statistiques et afficher ligne par ligne
+                    List<String> stats = objet.getStats();  // Assurez-vous que getStats() retourne une liste de chaînes
+                    float yOffsetForStats = yOffset - row * (slotSize + 10) - 20;  // Position initiale pour afficher les stats
+
+                    for (String stat : stats) {
+                        font.draw(batch, stat, xOffset + col * (slotSize + 10), yOffsetForStats);
+                        yOffsetForStats -= 10;  // Décaler verticalement pour la ligne suivante
+                    }
+                }
+            }
+        }
+
+        batch.end();
     }
 
     public void render(SpriteBatch batch, OrthographicCamera uiCamera) {
@@ -177,32 +238,6 @@ public class MainCharacter {
         if (!collisions.doCollide(newPosition)) {
             position.set(newPosition);
         }
-    }
-
-    public void displayInventory(SpriteBatch batch, OrthographicCamera uiCamera){
-        BitmapFont font = game.getFont();
-        batch.setProjectionMatrix(uiCamera.combined);
-        ShapeRenderer shapeRenderer = new ShapeRenderer();
-        shapeRenderer.setProjectionMatrix(uiCamera.combined);
-
-        float boxX = 50;
-        float boxY = 50;
-        float boxWidth = Gdx.graphics.getWidth() - 100;
-        float boxHeight = 150;
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 0, 0.7f);
-        shapeRenderer.rect(boxX, boxY, boxWidth, boxHeight);
-        shapeRenderer.end();
-
-        batch.begin();
-        font.getData().setScale(0.5f);
-        float textY = boxY + boxHeight - 20;
-        float lineHeight = 20;
-        for (QuestObject objet : inventory.getQuestObjects()) {
-            font.draw(batch, objet.getObjectName() + " : " + objet.getStats(), boxX + 20, textY);
-            textY -= lineHeight;        }
-        batch.end();
     }
 
     public void update(float delta, TiledMap map) {
