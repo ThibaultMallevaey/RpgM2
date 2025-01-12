@@ -18,7 +18,7 @@ Ouvrir un terminal dans le dossier contenant le .jar et lancer la commande suiva
 
 Autre option sur macos et linux : 
 Au niveau du répertoire, lancer la commande suivante dans un terminal : 
-	`./gradlew lwjgl3:run`
+`./gradlew lwjgl3:run`
 
 
 ## Ajout de fonctionnalités : 
@@ -39,19 +39,19 @@ Pour créer des liens entre les cartes, ajouter dans les cartes correpondantes u
 Ajouter au sein de cette couche les éllipses permetant les transitions
 Dans le code, ajouter dans les méthodes logic() des cartes correpondante les transtions sous forme de if / else if statement :
 ```
-	this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
-        if (transitions.onTransition("TransitionNouvelleCarte")){
-            game.setScreen(game.nouvelleCarte);
-            game.nouvelleCarte.setUpMainCharacter(game.getMainCharacter(), new Vector2(x, y), mainCharacter.getSpeed());
-        }
+this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
+    if (transitions.onTransition("TransitionNouvelleCarte")){
+        game.setScreen(game.nouvelleCarte);
+        game.nouvelleCarte.setUpMainCharacter(game.getMainCharacter(), new Vector2(x, y), mainCharacter.getSpeed());
+    }
 ```
 
 ### Ajout de PNJ : 
 Il est possible d'ajouter des PNJ dans les cartes via la méthode addNpc(). 
 ajouter dans RpgGame.create() : 
 ```
-	nouvelleMap.addNpc("name", "texture", texte, position, scale);
-	name = String, texture = String, texte = ArrayList<String>, position = Vector2, scale = float
+nouvelleMap.addNpc("name", "texture", texte, position, scale);
+name = String, texture = String, texte = ArrayList<String>, position = Vector2, scale = float
 ```
 
 ## Recompiler le jeu : 
