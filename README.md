@@ -1,6 +1,12 @@
 # RpgM2 : guide d'installation 
 
+## Prérequis : 
+
+télécharger java (nous avons testé java 21, si vous utilisez une autre version vous pourriez recontrer des dysfonctionnements)
+
+
 ## Pour jouer au jeu : 
+
 télécharger le fichier .jar : https://github.com/ThibaultMallevaey/RpgM2/blob/main/RpgM2-1.0.0.jar
 
 Ou : 
@@ -11,6 +17,11 @@ git clone https://github.com/ThibaultMallevaey/RpgM2.git
 ```
 
 #### Pour lancer le .jar : 
+
+Double-cliquer sur le jeu 
+
+ou 
+
 Ouvrir un terminal dans le dossier contenant le .jar et lancer la commande suivante :
 	```
 	java -jar RpgM2-1.0.0.jar
@@ -57,7 +68,9 @@ name = String, texture = String, texte = ArrayList<String>, position = Vector2, 
 ## Recompiler le jeu : 
 Suite à l'ajout de fonctionnalités, il faut recompiler le jeu. 
 Ouvrir un terminal au dossier RpgM2. Lancer la commande suivante : 
-	`./gradlew build`
+```
+./gradlew build
+```
 
 
 
