@@ -72,7 +72,7 @@ Ouvrir un terminal au dossier RpgM2. Lancer la commande suivante :
 ./gradlew build
 ```
 
-
+2024, Par Drystan Thyarion, Sara Spieler et Thibault Mallevaey 
 
 
 
