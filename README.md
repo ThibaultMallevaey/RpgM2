@@ -12,7 +12,7 @@ télécharger le fichier .jar : https://github.com/ThibaultMallevaey/RpgM2/blob/
 Ou : 
 
 git clone le repository entier : 
-```
+```bash
 git clone https://github.com/ThibaultMallevaey/RpgM2.git
 ```
 
@@ -23,9 +23,9 @@ Double-cliquer sur le jeu
 ou 
 
 Ouvrir un terminal dans le dossier contenant le .jar et lancer la commande suivante :
-	```
-	java -jar RpgM2-1.0.0.jar
-	```
+```bash
+java -jar RpgM2-1.0.0.jar
+```
 
 Autre option sur macos et linux : 
 Au niveau du répertoire, lancer la commande suivante dans un terminal : 
@@ -42,14 +42,14 @@ de ranger la map dans le package interiors ou exteriors. Pour plus d'aide concer
 référer au com.UE36.RpgM2.Screens.Template fournie dans le dépôt 
 
 Créer une instance de cette classe dans la méthode create() de la classe RpgGame: 
-```
+```bash
 NouvelleMap nouvelleMap = new nouvelleMap(this);
 ```
 
 Pour créer des liens entre les cartes, ajouter dans les cartes correpondantes un couche d'objet Transition. 
 Ajouter au sein de cette couche les éllipses permetant les transitions
 Dans le code, ajouter dans les méthodes logic() des cartes correpondante les transtions sous forme de if / else if statement :
-```
+```java
 this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharacter);
     if (transitions.onTransition("TransitionNouvelleCarte")){
         game.setScreen(game.nouvelleCarte);
@@ -60,7 +60,7 @@ this.transitions = new Transitions(mainCharacter.getPosition(), map, mainCharact
 ### Ajout de PNJ : 
 Il est possible d'ajouter des PNJ dans les cartes via la méthode addNpc(). 
 ajouter dans RpgGame.create() : 
-```
+```java
 nouvelleMap.addNpc("name", "texture", texte, position, scale);
 name = String, texture = String, texte = ArrayList<String>, position = Vector2, scale = float
 ```
@@ -68,7 +68,7 @@ name = String, texture = String, texte = ArrayList<String>, position = Vector2, 
 ## Recompiler le jeu : 
 Suite à l'ajout de fonctionnalités, il faut recompiler le jeu. 
 Ouvrir un terminal au dossier RpgM2. Lancer la commande suivante : 
-```
+```bash
 ./gradlew build
 ```
 
